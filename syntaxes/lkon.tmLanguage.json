@@ -32,62 +32,62 @@
 	],
 	"repository": {
 		"multiline_comment": {
-			"contentName": "comment.block.lkon",
+			"contentName": "comment.block.bcon",
 			"begin": "'",
 			"beginCaptures": {
-				"0": {"name": "punctuation.definition.comment.lkon"}
+				"0": {"name": "punctuation.definition.comment.bcon"}
 			},
 			"end": "'",
 			"endCaptures": {
-				"0": {"name": "punctuation.definition.comment.lkon"}
+				"0": {"name": "punctuation.definition.comment.bcon"}
 			}
 			
 		},
 
 		"var_expr_str_double_quote": {
-			"contentName": "meta.var.expr.lkon",
+			"contentName": "meta.var.expr.bcon",
 			"begin": "(?<==>.*)\"",
 			"beginCaptures": {
-				"0": {"name": "punctuation.definition.string.begin.lkon"}
+				"0": {"name": "punctuation.definition.string.begin.bcon"}
 			},
 			"end": "\"",
 			"endCaptures": {
-				"0": {"name": "punctuation.definition.string.end.lkon"}
+				"0": {"name": "punctuation.definition.string.end.bcon"}
 			},
-			"name": "string.quoted.double.lkon",
+			"name": "string.quoted.double.bcon",
 			"patterns": [
 				{
-					"name": "meta.template.expression.lkon",
+					"name": "meta.template.expression.bcon",
 					"begin": "\\[",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.definition.template-expression.begin.lkon"
+							"name": "punctuation.definition.template-expression.begin.bcon"
 						}
 					},
 					"patterns": [
 						{
-							"name":"meta.template.expression.lkon",
+							"name":"meta.template.expression.bcon",
 							"match":"(\\b(Main)\\b(\\.)|([_a-zA-Z][_a-zA-Z0-9]*)(\\.))|([_a-zA-Z0-9]*)(\\.)*",
 							"captures":{
-								"2": {"name": "variable.language.main.lkon"},
-								"3": {"name": "puntuation.accessor.dot.lkon"},
+								"2": {"name": "variable.language.main.bcon"},
+								"3": {"name": "puntuation.accessor.dot.bcon"},
 								"4": {"name": "variable.other.object"},
-								"5": {"name": "puntuation.accessor.dot.lkon"},
+								"5": {"name": "puntuation.accessor.dot.bcon"},
 								"6": {"name": "variable.other.object"},
-								"7": {"name": "puntuation.accessor.dot.lkon"}
+								"7": {"name": "puntuation.accessor.dot.bcon"}
 							}
 						}
 					],
 					"end": "\\]",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.definition.template-expression.end.lkon"
+							"name": "punctuation.definition.template-expression.end.bcon"
 						}
 					},
-					"contentName": "meta.embedded.line.lkon"
+					"contentName": "meta.embedded.line.bcon"
 				},
 				{
-					"name": "constant.character.escape.lkon",
+					"name": "constant.character.escape.bcon",
 					"match": "(?=.*\"date)([-:.])|(\\\\u[0-9A-Fa-f]{4})|(\\\\.)|(\\\\\")"
 				}
 			]
@@ -95,104 +95,104 @@
 
 		"comments": {
 			"patterns": [{
-				"name":"comment.line.lkon",
+				"name":"comment.line.bcon",
 				"match": "#[^\n\r]*"
 			}]
 		},
 		"braces": {
             "patterns": [{
-                "name":"meta.brace.square.lkon",
+                "name":"meta.brace.square.bcon",
                 "match":"(\\[|\\])"
             }]
         },
 		"var-expr": {
 			"patterns": [
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match": "(@\\*|@)(\\b([a-zA-Z_][a-zA-Z0-9_]+)\\b)?",
 					"captures": {
-						"1": {"name": "storage.type.lkon"},
-						"2": {"name": "variable.name.lkon"}
+						"1": {"name": "storage.type.bcon"},
+						"2": {"name": "variable.name.bcon"}
 					}
 				},
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match":"(=>)",
 					"captures": {
-						"1":{"name": "keyword.operator.assignment.lkon"}
+						"1":{"name": "keyword.operator.assignment.bcon"}
 					}
 				},
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match":"(?<==>.*)(?<!\".*)((\\b(Main)\\b|(\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b))(\\.)){1}(([a-zA-Z0-9_]*)(\\.)?)*",
 					"captures":{
-						"3": {"name": "variable.language.main.lkon"},
+						"3": {"name": "variable.language.main.bcon"},
 						"4": {"name": "variable.other.object"},
-						"6": {"name": "puntuation.accessor.lkon"},
-						"7": {"name": "variable.other.property.lkon"}
+						"6": {"name": "puntuation.accessor.bcon"},
+						"7": {"name": "variable.other.property.bcon"}
 					}
 				},
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match":"(?<==>.*)\\b(Infinity|Undefined|Null|NaN|True|False)\\b",
 					"captures":{
-						"1":{"name":"constant.language.lkon"}	
+						"1":{"name":"constant.language.bcon"}	
 					}
 				},
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match": "(?<==>.*)(-)?(0x[A-Fa-f0-9]*)|(0b[0-1]*)|(0o[0-7]*)",
 					"captures": {
 						"1": {"name":"keyword.operator.arithmetic"},
-						"2": {"name": "constant.numeric.hexadecimal.lkon"},
-						"3": {"name": "constant.numeric.binary.lkon"},
-						"4": {"name": "constant.numeric.octagonal.lkon"}
+						"2": {"name": "constant.numeric.hexadecimal.bcon"},
+						"3": {"name": "constant.numeric.binary.bcon"},
+						"4": {"name": "constant.numeric.octagonal.bcon"}
 					}
 				},
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match": "(?<==>.*)(-)?(\\.)?\\b((\\d*_)*\\d*(\\.\\d*)?(e[\\+\\-]\\d*)?)(n)?\\b",
 					"captures": {
 						"1": {"name":"keyword.operator.arithmetic"},
-						"2": {"name":"constant.numeric.decimal.lkon"},
-						"3": {"name":"constant.numeric.decimal.lkon"},
-						"7": {"name":"constant.numeric.decimal.lkon"}
+						"2": {"name":"constant.numeric.decimal.bcon"},
+						"3": {"name":"constant.numeric.decimal.bcon"},
+						"7": {"name":"constant.numeric.decimal.bcon"}
 					}
 				},
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match": "(?<==>.*)(?<=\".*\")(\\.)(date|ascii|base64|base64url|hex|ucs2|ucs-2|utf16le|utf-16le|utf8|utf-8|bin|binary|latin1)",
 					"captures": {
-						"1": {"name": "keyword.other.encoding.lkon"},
-						"2": {"name": "keyword.other.encoding.lkon"}
+						"1": {"name": "keyword.other.encoding.bcon"},
+						"2": {"name": "keyword.other.encoding.bcon"}
 					}
 				},
 				{
-					"name":"meta.var.expr.lkon",
+					"name":"meta.var.expr.bcon",
 					"match": "(?<==>.*)(/)(.*)(/)([dgimsuvy]*)",
 					"captures": {
-						"1":{"name":"string.regexp.lkon", "patterns": [{"name":"punctuation.definition.string.begin.lkon", "match":"/"}]},
-						"2":{"name": "string.regexp.lkon"},
-						"3":{"name":"string.regexp.lkon", "patterns": [{"name":"punctuation.definition.string.end.lkon", "match":"/"}]},
-						"4":{"name": "keyword.other.lkon"}
+						"1":{"name":"string.regexp.bcon", "patterns": [{"name":"punctuation.definition.string.begin.bcon", "match":"/"}]},
+						"2":{"name": "string.regexp.bcon"},
+						"3":{"name":"string.regexp.bcon", "patterns": [{"name":"punctuation.definition.string.end.bcon", "match":"/"}]},
+						"4":{"name": "keyword.other.bcon"}
 					}
 				}
 			]
 		},
 		"importuseas_str_double_quote": {
-			"contentName": "meta.importuseas.lkon",
+			"contentName": "meta.importuseas.bcon",
 			"begin": "(?<=use.*|as.*|import.*)\"",
 			"beginCaptures": {
-				"0": {"name": "punctuation.definition.string.begin.lkon"}
+				"0": {"name": "punctuation.definition.string.begin.bcon"}
 			},
 			"end": "\"",
 			"endCaptures": {
-				"0": {"name": "punctuation.definition.string.end.lkon"}
+				"0": {"name": "punctuation.definition.string.end.bcon"}
 			},
-			"name": "string.quoted.double.lkon",
+			"name": "string.quoted.double.bcon",
 			"patterns": [
 				{
-					"name": "constant.character.escape.lkon",
+					"name": "constant.character.escape.bcon",
 					"match": "(?=.*\"\\.date)([-:.])|(\\\\u[0-9A-Fa-f]{4})|(\\\\.)|(\\\\\")"
 				}
 			]
@@ -200,62 +200,62 @@
 		"keywords": {
 			"patterns": [
 				{
-					"name":"meta.importuseas.lkon",
+					"name":"meta.importuseas.bcon",
 					"match":"\\b(^import|^use|as)\\b",
 					"captures": {
-						"1":{"name":"keyword.control.lkon"}
+						"1":{"name":"keyword.control.bcon"}
 					}
 				},
 				{
-					"name":"meta.importuseas.lkon",
+					"name":"meta.importuseas.bcon",
 					"match":"(?<=(import|use|as) *)\\b(Infinity|Undefined|Null|NaN|True|False)\\b",
 					"captures":{
-						"2":{"name":"constant.language.lkon"}	
+						"2":{"name":"constant.language.bcon"}	
 					}
 				},
 				{
-					"name":"meta.importuseas.lkon",
+					"name":"meta.importuseas.bcon",
 					"match": "(?<=use *|as *) (-)?(0x[A-Fa-f0-9]*)|(0b[0-1]*)|(0o[0-7]*)",
 					"captures": {
 						"1": {"name":"keyword.operator.arithmetic"},
-						"2": {"name": "constant.numeric.hexadecimal.lkon"},
-						"3": {"name": "constant.numeric.binary.lkon"},
-						"4": {"name": "constant.numeric.octagonal.lkon"}
+						"2": {"name": "constant.numeric.hexadecimal.bcon"},
+						"3": {"name": "constant.numeric.binary.bcon"},
+						"4": {"name": "constant.numeric.octagonal.bcon"}
 					}
 				},
 				{
-					"name":"meta.importuseas.lkon",
+					"name":"meta.importuseas.bcon",
 					"match":"(?<=use *|as *) (-)?(\\.)?\\b((\\d*_)*\\d*(\\.\\d*)?(e[\\+\\-]\\d*)?)(n)?\\b",
 					"captures": {
 						"1": {"name":"keyword.operator.arithmetic"},
-						"2": {"name":"constant.numeric.decimal.lkon"},
-						"3": {"name":"constant.numeric.decimal.lkon"},
-						"7": {"name":"constant.numeric.decimal.lkon"}
+						"2": {"name":"constant.numeric.decimal.bcon"},
+						"3": {"name":"constant.numeric.decimal.bcon"},
+						"7": {"name":"constant.numeric.decimal.bcon"}
 					}
 				},
 				{
-					"name":"meta.importuseas.lkon",
+					"name":"meta.importuseas.bcon",
 					"match":"(?<=(use|import).*\".*\")(\\.)(date|ascii|base64|base64url|hex|ucs2|ucs-2|utf16le|utf-16le|utf8|utf-8|bin|binary|latin1)",
 					"captures": {
-						"2": {"name": "keyword.other.encoding.lkon"},
-						"3": {"name": "keyword.other.encoding.lkon"}
+						"2": {"name": "keyword.other.encoding.bcon"},
+						"3": {"name": "keyword.other.encoding.bcon"}
 					}
 				},
 				{
-					"name":"meta.importuseas.lkon",
+					"name":"meta.importuseas.bcon",
 					"match": "(?<=(import|use|as) )(/)(.*)(/)([dgimsuvy]*)",
 					"captures": {
-						"2":{"name":"string.regexp.lkon", "patterns": [{"name":"punctuation.definition.string.begin.lkon", "match":"/"}]},
-						"3":{"name": "string.regexp.lkon"},
-						"4":{"name":"string.regexp.lkon", "patterns": [{"name":"punctuation.definition.string.end.lkon", "match":"/"}]},
-						"5":{"name": "keyword.other.lkon"}
+						"2":{"name":"string.regexp.bcon", "patterns": [{"name":"punctuation.definition.string.begin.bcon", "match":"/"}]},
+						"3":{"name": "string.regexp.bcon"},
+						"4":{"name":"string.regexp.bcon", "patterns": [{"name":"punctuation.definition.string.end.bcon", "match":"/"}]},
+						"5":{"name": "keyword.other.bcon"}
 					}
 				},
 				{
-					"name":"meta.importuseas.lkon",
+					"name":"meta.importuseas.bcon",
 					"match": "(?<=as )(\\b([a-zA-Z_][a-zA-Z0-9_]+)\\b)?",
 					"captures": {
-						"1": {"name": "variable.name.lkon"}
+						"1": {"name": "variable.name.bcon"}
 					}
 				}
 			]
@@ -264,11 +264,11 @@
 		"punctuation": {
 			"patterns": [
 				{
-					"name": "punctuation.terminator.statement.lkon",
+					"name": "punctuation.terminator.statement.bcon",
 					"match": ";"
 				}
 			]
 		}
 	},
-	"scopeName": "source.lkon"
+	"scopeName": "source.bcon"
 }

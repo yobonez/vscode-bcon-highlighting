@@ -1,7 +1,7 @@
 {
-  "name": "lkon-syntax-highlighting",
-  "displayName": "LKON Syntax highlighting",
-  "description": "Syntax highlighting support for LKON.",
+  "name": "bcon-syntax-highlighting",
+  "displayName": "BCON Syntax highlighting",
+  "description": "Syntax highlighting support for BCON.",
   "icon": "icon.png",
   "version": "1.0.0",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "contributors": ["ParrotCore"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yobonez/vscode-lkon-highlighting.git"
+    "url": "https://github.com/yobonez/vscode-bcon-highlighting.git"
   },
   "engines": {
     "vscode": "^1.81.0"
@@ -20,21 +20,15 @@
   ],
   "contributes": {
     "languages": [{
-      "id": "lkon",
-      "aliases": ["Language for Konfiguration Object Notation", "lkon"],
-      "extensions": [".lkon"],
+      "id": "bcon",
+      "aliases": ["BCON Configures Only Nicely", "bcon"],
+      "extensions": [".bcon"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
-      "language": "lkon",
-      "scopeName": "source.lkon",
-      "path": "./syntaxes/lkon.tmLanguage.json"
-    },
-    {
-      "fileTypes":[".js"],
-      "path": "./syntaxes/injection_working.json",
-      "scopeName": "lkon.injection",
-      "injectTo": ["source.js"]
+      "language": "bcon",
+      "scopeName": "source.bcon",
+      "path": "./syntaxes/bcon.tmLanguage.json"
     }
     ]
   }

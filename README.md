@@ -1,16 +1,8 @@
-# LKON Syntax highlighting
+# BCON - BCON Configures Only Nicely. Syntax highlighting
 
-## Get LKON language
-
-### npm
-`npm i lkon`
-
-https://npmjs.org/package/lkon
-
-### Github 
-https://github.com/parrotcore/lkon
+## Get BCON
+https://github.com/parrotcore/bcon
 
 ## Features 
-
-- Syntax highlighting of `.lkon` files
-- Embedded LKON highlighting by wrapping your code with `#startlkon` and `#endlkon` statements inside javascript template strings.
+- Syntax highlighting of `.bcon` files
+- Embedded BCON highlighting comming soon
