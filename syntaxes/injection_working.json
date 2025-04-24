@@ -16,11 +16,11 @@
 					"patterns": [
 						{
 							"contentName": "comment.block.lkon",
-							"begin": "'''",
+							"begin": "'",
 							"beginCaptures": {
 								"0": {"name": "punctuation.definition.comment.lkon"}
 							},
-							"end": "'''",
+							"end": "'",
 							"endCaptures": {
 								"0": {"name": "punctuation.definition.comment.lkon"}
 							}
@@ -85,12 +85,22 @@
 						},
 						{
 							"name":"meta.var.expr.lkon",
-							"match": "(?<==>.*)(-)?(([\\d]+)(\\.)?)(e\\+|x|b)?",
+							"match": "(?<==>.*)(-)?(0x[A-Fa-f0-9]*)|(0b[0-1]*)|(0o[0-7]*)",
 							"captures": {
 								"1": {"name":"keyword.operator.arithmetic"},
-								"2": {"name": "constant.numeric.decimal.lkon"},
-								"4": {"name": "meta.delimiter.decimal.period.lkon"},
-								"5": {"name": "constant.numeric.decimal.lkon"}
+								"2": {"name": "constant.numeric.hexadecimal.lkon"},
+								"3": {"name": "constant.numeric.binary.lkon"},
+								"4": {"name": "constant.numeric.octagonal.lkon"}
+							}
+						},
+						{
+							"name":"meta.var.expr.lkon",
+							"match": "(?<==>.*)(-)?(\\.)?\\b((\\d*_)*\\d*(\\.\\d*)?(e[\\+\\-]\\d*)?)(n)?\\b",
+							"captures": {
+								"1": {"name":"keyword.operator.arithmetic"},
+								"2": {"name":"constant.numeric.decimal.lkon"},
+								"3": {"name":"constant.numeric.decimal.lkon"},
+								"7": {"name":"constant.numeric.decimal.lkon"}
 							}
 						},
 						{
@@ -126,12 +136,22 @@
 						},
 						{
 							"name":"meta.importuseas.lkon",
-							"match":"(?<=use.*|as.*)(-)?(([\\d]+)(\\.)?)(e\\+|x|b)?",
+							"match": "(?<=use *|as *) (-)?(0x[A-Fa-f0-9]*)|(0b[0-1]*)|(0o[0-7]*)",
 							"captures": {
 								"1": {"name":"keyword.operator.arithmetic"},
-								"2": {"name": "constant.numeric.decimal.lkon"},
-								"4": {"name": "meta.delimiter.decimal.period.lkon"},
-								"5": {"name": "constant.numeric.decimal.lkon"}
+								"2": {"name": "constant.numeric.hexadecimal.lkon"},
+								"3": {"name": "constant.numeric.binary.lkon"},
+								"4": {"name": "constant.numeric.octagonal.lkon"}
+							}
+						},
+						{
+							"name":"meta.importuseas.lkon",
+							"match":"(?<=use *|as *) (-)?(\\.)?\\b((\\d*_)*\\d*(\\.\\d*)?(e[\\+\\-]\\d*)?)(n)?\\b",
+							"captures": {
+								"1": {"name":"keyword.operator.arithmetic"},
+								"2": {"name":"constant.numeric.decimal.lkon"},
+								"3": {"name":"constant.numeric.decimal.lkon"},
+								"7": {"name":"constant.numeric.decimal.lkon"}
 							}
 						},
 						{

@@ -3,7 +3,7 @@
   "displayName": "LKON Syntax highlighting",
   "description": "Syntax highlighting support for LKON.",
   "icon": "icon.png",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "license": "MIT",
   "publisher": "yobonez",
   "author": "yobonez <59935203+yobonez@users.noreply.github.com> (https://github.com/yobonez/)",
