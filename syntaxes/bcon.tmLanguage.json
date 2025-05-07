@@ -67,14 +67,16 @@
 					"patterns": [
 						{
 							"name":"meta.template.expression.bcon",
-							"match":"(\\b(Main)\\b(\\.)|([_a-zA-Z][_a-zA-Z0-9]*)(\\.))|([_a-zA-Z0-9]*)(\\.)*",
+							"match":"(\\b(Main)\\b(\\.)|\\b(This)\\b(\\.)|([_a-zA-Z][_a-zA-Z0-9]*)(\\.))|([_a-zA-Z0-9]*)(\\.)*",
 							"captures":{
 								"2": {"name": "variable.language.main.bcon"},
 								"3": {"name": "puntuation.accessor.dot.bcon"},
-								"4": {"name": "variable.other.object"},
+								"4": {"name": "variable.language.this.bcon"},
 								"5": {"name": "puntuation.accessor.dot.bcon"},
 								"6": {"name": "variable.other.object"},
-								"7": {"name": "puntuation.accessor.dot.bcon"}
+								"7": {"name": "puntuation.accessor.dot.bcon"},
+								"8": {"name": "variable.other.object"},
+								"9": {"name": "puntuation.accessor.dot.bcon"}
 							}
 						}
 					],

@@ -1,2 +1,2 @@
-# Changelog
-v1.0.0 - BCON
+# Changelog - v1.0.1
+- Added missing "This" keyword
