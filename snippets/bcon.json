@@ -1,0 +1,110 @@
+{
+  "Import from file": {
+    "prefix": "import",
+    "body": [
+      "import [",
+      "\t${1:value};",
+      "] from \"${2:./file.bcon}\".utf8;"
+    ],
+    "description": "Import values from BCON file"
+  },
+  "Import as": {
+    "prefix": "importas",
+    "body": [
+      "import \"${1:./file.bcon}\".utf8 as ${2:name};"
+    ],
+    "description": "Import entire file as variable"
+  },
+  "Use variable": {
+    "prefix": "use",
+    "body": [
+      "use ${1:value} as ${2:name};"
+    ],
+    "description": "Define a variable"
+  },
+  "Use object": {
+    "prefix": "useobj",
+    "body": [
+      "use [",
+      "\t@${1:key} => ${2:value};",
+      "] as ${3:name};"
+    ],
+    "description": "Define object variable"
+  },
+  "Use array": {
+    "prefix": "usearr",
+    "body": [
+      "use [",
+      "\t@* => ${1:value};",
+      "] as ${2:name};"
+    ],
+    "description": "Define array variable"
+  },
+  "Destructure": {
+    "prefix": "from",
+    "body": [
+      "use [",
+      "\t${1:key};",
+      "] from ${2:source};"
+    ],
+    "description": "Destructure values from object"
+  },
+  "Export object": {
+    "prefix": "export",
+    "body": [
+      "export [",
+      "\t@${1:key} => ${2:value};",
+      "];"
+    ],
+    "description": "Export configuration object"
+  },
+  "Dictionary entry": {
+    "prefix": "@",
+    "body": "@${1:key} => ${2:value};",
+    "description": "Dictionary key-value pair"
+  },
+  "Array item": {
+    "prefix": "@*",
+    "body": "@* => ${1:value};",
+    "description": "Array item"
+  },
+  "String interpolation": {
+    "prefix": "inter",
+    "body": "\"${1:text} [${2:Main.property}] ${3:text}\"",
+    "description": "String with interpolation"
+  },
+  "Comment block": {
+    "prefix": "comm",
+    "body": [
+      "'",
+      "${1:Comment text}",
+      "'"
+    ],
+    "description": "Multi-line comment"
+  },
+  "Date": {
+    "prefix": "date",
+    "body": "\"${1:01-01-2025}, ${2:12:00:00}.${3:000}\".date",
+    "description": "Date literal"
+  },
+  "Regex": {
+    "prefix": "regex",
+    "body": "/${1:pattern}/${2:flags}",
+    "description": "Regular expression"
+  },
+  "File": {
+    "prefix": "file",
+    "body": "\"${1:./file.txt}\".${2|utf8,binary,ascii,base64|}",
+    "description": "File reference with encoding"
+  },
+  "Boolean true": {
+    "prefix": "true",
+    "body": "True",
+    "description": "Boolean true value"
+  },
+  "Boolean false": {
+    "prefix": "false",
+    "body": "False",
+    "description": "Boolean false value"
+  }
+}

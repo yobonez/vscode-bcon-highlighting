@@ -3,7 +3,7 @@
   "displayName": "BCON Syntax highlighting",
   "description": "Syntax highlighting support for BCON.",
   "icon": "icon.png",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "license": "MIT",
   "publisher": "yobonez",
   "author": "yobonez <59935203+yobonez@users.noreply.github.com> (https://github.com/yobonez/)",
@@ -18,6 +18,8 @@
   "categories": [
     "Programming Languages"
   ],
+  "extensionDependencies": [],
+  "extensionPack": [],
   "contributes": {
     "languages": [{
       "id": "bcon",
@@ -29,7 +31,10 @@
       "language": "bcon",
       "scopeName": "source.bcon",
       "path": "./syntaxes/bcon.tmLanguage.json"
-    }
-    ]
+    }],
+    "snippets": [{
+      "language": "bcon",
+      "path": "./snippets/bcon.json"
+    }]
   }
 }
