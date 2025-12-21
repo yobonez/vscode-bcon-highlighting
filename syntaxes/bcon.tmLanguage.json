@@ -18,6 +18,9 @@
 			"include": "#braces"
 		},
 		{
+			"include": "#parentheses"
+		},
+		{
 			"include": "#var-expr"
 		},
 		{
@@ -109,16 +112,57 @@
                 "match":"(\\[|\\])"
             }]
         },
+		"parentheses": {
+            "patterns": [{
+                "name":"meta.brace.round.bcon",
+                "match":"(\\(|\\))"
+            }]
+        },
 		"class-definition": {
-			"begin": "\\b(class)\\s+([A-Z][a-zA-Z0-9_]*)\\s*(extends)?\\s*([A-Z][a-zA-Z0-9_]*)?\\s*\\[",
+			"begin": "\\b(class)\\s+([A-Z][a-zA-Z0-9_]*)",
 			"beginCaptures": {
 				"1": {"name": "keyword.control.class.bcon"},
-				"2": {"name": "entity.name.type.class.bcon"},
-				"3": {"name": "keyword.control.class.bcon"},
-				"4": {"name": "entity.name.type.class.bcon"}
+				"2": {"name": "entity.name.type.class.bcon"}
 			},
-			"end": "\\](?=\\s*;)",
+			"end": "\\];",
 			"patterns": [
+				{
+					"name": "meta.class.constructor-params.bcon",
+					"begin": "\\(",
+					"end": "\\)",
+					"beginCaptures": {
+						"0": {"name": "punctuation.section.parens.begin.bcon"}
+					},
+					"endCaptures": {
+						"0": {"name": "punctuation.section.parens.end.bcon"}
+					},
+					"patterns": [
+						{
+							"name": "keyword.operator.spread.bcon",
+							"match": "\\.\\.\\."
+						},
+						{
+							"name": "variable.parameter.bcon",
+							"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+						},
+						{
+							"name": "punctuation.separator.parameter.bcon",
+							"match": ","
+						}
+					]
+				},
+				{
+					"name": "keyword.control.class.bcon",
+					"match": "\\b(extends)\\b"
+				},
+				{
+					"name": "entity.name.type.class.bcon",
+					"match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+				},
+				{
+					"name": "punctuation.section.class.begin.bcon",
+					"match": "\\["
+				},
 				{
 					"include": "#comments"
 				},
@@ -126,20 +170,39 @@
 					"include": "#multiline_comment"
 				},
 				{
+					"name": "meta.class.field.array-type.bcon",
+					"begin": "(@)([a-zA-Z_][a-zA-Z0-9_]*)(\\?)?\\s*(:)\\s*(\\[)(String|Number|Boolean|BigInt|Date|RegExp|Array|Object|Any|[A-Z][a-zA-Z0-9_]*)(\\])\\s*(=>)?",
+					"end": ";",
+					"beginCaptures": {
+						"1": {"name": "storage.type.bcon"},
+						"2": {"name": "variable.parameter.bcon"},
+						"3": {"name": "keyword.operator.optional.bcon"},
+						"4": {"name": "punctuation.separator.type.bcon"},
+						"5": {"name": "punctuation.definition.type.begin.bcon"},
+						"6": {"name": "entity.name.type.bcon"},
+						"7": {"name": "punctuation.definition.type.end.bcon"},
+						"8": {"name": "keyword.operator.assignment.default.bcon"}
+					},
+					"endCaptures": {
+						"0": {"name": "punctuation.terminator.statement.bcon"}
+					},
+					"patterns": [
+						{"include": "#class-field-values"}
+					]
+				},
+				{
 					"include": "#class-field-type-object"
 				},
 				{
 					"name": "meta.class.field.bcon",
-					"match": "(@)([a-zA-Z_][a-zA-Z0-9_]*)(\\?)?(\\s*)(:)(\\s*)([A-Z][a-zA-Z0-9_]*|String|Number|Boolean|BigInt|Date|RegExp|Array|Object|Any)?(\\s*=)?",
+					"match": "(@)([a-zA-Z_][a-zA-Z0-9_]*)(\\?)?\\s*(:)\\s*([A-Z][a-zA-Z0-9_]*|String|Number|Boolean|BigInt|Date|RegExp|Array|Object|Any)?\\s*(=>)?",
 					"captures": {
 						"1": {"name": "storage.type.bcon"},
 						"2": {"name": "variable.parameter.bcon"},
 						"3": {"name": "keyword.operator.optional.bcon"},
 						"4": {"name": "punctuation.separator.type.bcon"},
-						"5": {"name": "punctuation.separator.type.bcon"},
-						"6": {"name": "punctuation.separator.type.bcon"},
-						"7": {"name": "entity.name.type.bcon"},
-						"8": {"name": "keyword.operator.assignment.default.bcon"}
+						"5": {"name": "entity.name.type.bcon"},
+						"6": {"name": "keyword.operator.assignment.default.bcon"}
 					}
 				},
 				{
@@ -177,6 +240,39 @@
 		"class-field-values": {
 			"patterns": [
 				{
+					"name": "meta.constructor-call.bcon",
+					"begin": "([A-Z][a-zA-Z0-9_]*)\\s*(\\()",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {"name": "entity.name.type.bcon"},
+						"2": {"name": "punctuation.section.parens.begin.bcon"}
+					},
+					"endCaptures": {
+						"0": {"name": "punctuation.section.parens.end.bcon"}
+					},
+					"patterns": [
+						{"include": "#constructor-arguments"}
+					]
+				},
+				{
+					"name": "meta.array.empty.bcon",
+					"match": "\\[\\s*\\]"
+				},
+				{
+					"name": "meta.structure.array.bcon",
+					"begin": "\\[(?!\\s*\\])",
+					"end": "\\]",
+					"patterns": [
+						{
+							"include": "#class-field-values"
+						},
+						{
+							"name": "punctuation.separator.bcon",
+							"match": ";"
+						}
+					]
+				},
+				{
 					"name": "constant.language.bcon",
 					"match": "\\b(True|False|Null|Undefined|NaN|Infinity)\\b"
 				},
@@ -206,6 +302,18 @@
 				{
 					"name": "entity.name.type.bcon",
 					"match": "\\b(String|Number|Boolean|BigInt|Date|RegExp|Array|Object|Any)\\b"
+				},
+				{
+					"name": "keyword.operator.nullish.bcon",
+					"match": "\\?"
+				},
+				{
+					"name": "keyword.operator.spread.bcon",
+					"match": "\\.\\.\\."
+				},
+				{
+					"name": "variable.other.readwrite.bcon",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
 				}
 			]
 		},
@@ -225,6 +333,29 @@
 					"captures": {
 						"1":{"name": "keyword.operator.assignment.bcon"}
 					}
+				},
+				{
+					"name": "meta.spread.bcon",
+					"match": "(\\.\\.\\.)\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
+					"captures": {
+						"1": {"name": "keyword.operator.spread.bcon"},
+						"2": {"name": "variable.other.readwrite.bcon"}
+					}
+				},
+				{
+					"name": "meta.constructor-call.bcon",
+					"begin": "(?<=>)\\s*([A-Z][a-zA-Z0-9_]*)\\s*(\\()",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {"name": "entity.name.type.bcon"},
+						"2": {"name": "punctuation.section.parens.begin.bcon"}
+					},
+					"endCaptures": {
+						"0": {"name": "punctuation.section.parens.end.bcon"}
+					},
+					"patterns": [
+						{"include": "#constructor-arguments"}
+					]
 				},
 				{
 					"name":"meta.var.expr.bcon",
@@ -318,8 +449,12 @@
 		"keywords": {
 			"patterns": [
 				{
-					"name":"keyword.control.export.bcon",
-					"match":"\\b(export)\\b"
+					"name":"meta.export.bcon",
+					"match":"\\b(export)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+					"captures": {
+						"1": {"name": "keyword.control.export.bcon"},
+						"2": {"name": "variable.other.readwrite.bcon"}
+					}
 				},
 				{
 					"name":"keyword.control.class.bcon",
@@ -378,6 +513,22 @@
 					}
 				},
 				{
+					"name": "meta.constructor-call.bcon",
+					"begin": "(?<=use\\s+)([A-Z][a-zA-Z0-9_]*)\\s*(\\()",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {"name": "entity.name.type.bcon"},
+						"2": {"name": "punctuation.section.parens.begin.bcon"}
+					},
+					"endCaptures": {
+						"0": {"name": "punctuation.section.parens.end.bcon"}
+					},
+					"patterns": [
+						{"include": "#constructor-arguments"},
+						{"include": "#comments"}
+					]
+				},
+				{
 					"name":"meta.importuseas.bcon",
 					"match":"(?<=use *|as *|from *)\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b",
 					"captures": {
@@ -399,6 +550,56 @@
 				{
 					"name": "punctuation.terminator.statement.bcon",
 					"match": ";"
+				}
+			]
+		},
+		"constructor-arguments": {
+			"patterns": [
+				{
+					"name": "meta.constructor-call.nested.bcon",
+					"begin": "([A-Z][a-zA-Z0-9_]*)\\s*(\\()",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {"name": "entity.name.type.bcon"},
+						"2": {"name": "punctuation.section.parens.begin.bcon"}
+					},
+					"endCaptures": {
+						"0": {"name": "punctuation.section.parens.end.bcon"}
+					},
+					"patterns": [
+						{"include": "#constructor-arguments"}
+					]
+				},
+				{
+					"name": "keyword.operator.spread.bcon",
+					"match": "\\.\\.\\."
+				},
+				{
+					"name": "constant.language.bcon",
+					"match": "\\b(True|False|Null|Undefined|NaN|Infinity)\\b"
+				},
+				{
+					"name": "constant.numeric.decimal.bcon",
+					"match": "\\b\\d+(\\.\\d+)?(e[+-]?\\d+)?(n)?\\b"
+				},
+				{
+					"name": "string.quoted.double.bcon",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.bcon",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "variable.other.readwrite.bcon",
+					"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+				},
+				{
+					"name": "punctuation.separator.bcon",
+					"match": ","
 				}
 			]
 		}

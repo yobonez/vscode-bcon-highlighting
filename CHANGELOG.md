@@ -1,5 +1,49 @@
 # Changelog
 
+## v2.2.0 - 2025-12-21
+
+### New Features - BCON 2.3.0 Support
+- **Constructor Parameters** 🎉
+  - Added syntax highlighting for class constructor parameters: `class Name (param1, param2)`
+  - Support for spread operator in constructor parameters: `class Station (name, ...lines)`
+  - Parameter names highlighted with proper scopes
+  
+- **Constructor Calls**
+  - Full support for constructor calls: `use ClassName(arg1, arg2)`
+  - Nested constructor calls: `District("Name", Coordinates(55.7, 37.6))`
+  - Arguments highlighting (strings, numbers, variables, nested constructors)
+  
+- **Nullish Coalescing Operator**
+  - Added support for `?` operator in default values: `value ? default`
+  - Proper highlighting in class fields and expressions
+  
+- **Spread Operator**
+  - Support for spread syntax: `...array`, `...object`
+  - Spread in arrays: `[...arr1; ...arr2]`
+  - Spread in constructor arguments: `ClassName(...args)`
+  
+- **Enhanced Operators**
+  - Changed default value operator from `=` to `=>`
+  - Empty array literals `[]` properly handled
+  - Array type annotations: `@lines: [String]`
+
+- **Bracket Support**
+  - Added auto-closing pairs for parentheses `()`
+  - Bracket matching for round brackets
+  - Proper nesting support
+
+### Bug Fixes
+- Fixed issue where empty arrays `[]` in default values caused next line parsing errors
+- Fixed array type pattern order to prevent incorrect matching
+- Fixed optional field type highlighting with `?` operator
+- Improved pattern specificity for class field values
+
+### Improvements
+- Enhanced variable recognition after spread operator
+- Better export statement highlighting with variable names
+- Improved constructor argument parsing with nested calls
+- More robust pattern matching for edge cases
+
 ## v2.1.0 - 2025-12-21
 
 ### New Features - BCON 2.2.0 Support
