@@ -3,7 +3,7 @@
   "displayName": "BCON Syntax highlighting",
   "description": "Syntax highlighting support for BCON.",
   "icon": "icon.png",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT",
   "publisher": "yobonez",
   "author": "yobonez <59935203+yobonez@users.noreply.github.com> (https://github.com/yobonez/)",

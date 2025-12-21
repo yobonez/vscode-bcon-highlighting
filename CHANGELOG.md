@@ -1,5 +1,58 @@
 # Changelog
 
+## v2.1.0 - 2025-12-21
+
+### New Features - BCON 2.2.0 Support
+- **Class System Support** 🎉
+  - Added syntax highlighting for `class` keyword
+  - Added support for `extends` keyword (class inheritance)
+  - Added support for `includes` keyword (composition - reserved for future)
+  - Highlighting for class names in PascalCase (e.g., `City`, `Address`)
+  - Type annotations with `:` operator
+  - Optional fields with `?` operator
+  - Default values with `=` operator in class fields
+  
+- **Type System Support**
+  - Primitive types: `String`, `Number`, `Boolean`, `BigInt`, `Date`, `RegExp`, `Array`, `Object`, `Any`
+  - Custom class types recognized as references (e.g., `Coordinates`, `Address`)
+  - Type annotations in field definitions highlighted correctly
+  - Nested object and array types support
+
+### Examples
+```bcon
+# Class definition
+class City [
+    @name: String;
+    @population: Number;
+    @founded?: Date;
+];
+
+# Class with inheritance
+class CapitalCity extends City [
+    @parliament: String;
+    @isCapital: Boolean = True;
+];
+
+# Creating class instances
+use City [
+    @name => "Warsaw";
+    @population => 1720000;
+] as warsaw;
+```
+
+### Improvements
+- Better tokenization for class-related syntax
+- Enhanced type reference highlighting
+- Improved context-aware field definition highlighting
+
+### New Snippets
+- `class` - Basic class definition
+- `classext` - Class with inheritance
+- `field` - Required class field
+- `fieldopt` - Optional class field
+- `fielddef` - Field with default value
+- `useclass` - Create class instance
+
 ## v2.0.0 - 2025-12-18
 
 ### Major Improvements

@@ -8,13 +8,19 @@ Syntax highlighting extension for BCON (BCON Configures Only Nicely) configurati
 
 - ✨ Full syntax highlighting for `.bcon` files
 - 🎨 Support for all BCON language features:
-  - Keywords: `import`, `use`, `as`, `from`, `export`, `skip`
+  - Keywords: `import`, `use`, `as`, `from`, `export`, `skip`, `class`, `extends`, `includes`
   - Comments: single-line (`#`) and multi-line (`'...'`)
   - String interpolation with `[Main.property]` and `[This.property]`
   - Data types: strings, numbers, BigInt, booleans, dates, regex, files
   - Special constants: `True`, `False`, `Null`, `Undefined`, `NaN`, `Infinity`
   - Array (`@*`) and dictionary (`@key`) syntax
   - Destructuring and imports
+  - **Classes with type validation** (BCON 2.2.0+):
+    - Class definitions with fields and types
+    - Type annotations (`:`) for primitive and custom types
+    - Optional fields (`?`) and default values (`=`)
+    - Class inheritance with `extends`
+    - Primitive types: `String`, `Number`, `Boolean`, `BigInt`, `Date`, `RegExp`, `Array`, `Object`, `Any`
 - 📝 Proper tokenization for semantic highlighting
 
 ## Get BCON Parser
@@ -62,9 +68,37 @@ import [cityType] from "./cityTypes.bcon".utf8;
 use "production" as environment;
 use 8080 as port;
 
+# Class definition with type validation
+class City [
+    @name: String;
+    @population: Number;
+    @founded?: Date;
+    @coordinates: [
+        @lat: Number;
+        @lon: Number;
+    ];
+];
+
+# Class inheritance
+class CapitalCity extends City [
+    @parliament: String;
+    @isCapital: Boolean = True;
+];
+
+# Creating class instances
+use City [
+    @name => "Warsaw";
+    @population => 1720000;
+    @coordinates => [
+        @lat => 52.2297;
+        @lon => 21.0122;
+    ];
+] as warsaw;
+
 export [
     @environment => environment;
     @port => port;
+    @city => warsaw;
     @greeting => "Welcome to [Main.environment]!";
 ];
 ```

@@ -106,5 +106,47 @@
     "prefix": "false",
     "body": "False",
     "description": "Boolean false value"
+  },
+  "Class definition": {
+    "prefix": "class",
+    "body": [
+      "class ${1:ClassName} [",
+      "\t@${2:field}: ${3|String,Number,Boolean,BigInt,Date,RegExp,Array,Object,Any|};",
+      "];"
+    ],
+    "description": "Define a class with type validation"
+  },
+  "Class with inheritance": {
+    "prefix": "classext",
+    "body": [
+      "class ${1:ClassName} extends ${2:BaseClass} [",
+      "\t@${3:field}: ${4|String,Number,Boolean,BigInt,Date,RegExp,Array,Object,Any|};",
+      "];"
+    ],
+    "description": "Define a class with inheritance"
+  },
+  "Class field required": {
+    "prefix": "field",
+    "body": "@${1:name}: ${2|String,Number,Boolean,BigInt,Date,RegExp,Array,Object,Any|};",
+    "description": "Required class field with type"
+  },
+  "Class field optional": {
+    "prefix": "fieldopt",
+    "body": "@${1:name}?: ${2|String,Number,Boolean,BigInt,Date,RegExp,Array,Object,Any|};",
+    "description": "Optional class field with type"
+  },
+  "Class field with default": {
+    "prefix": "fielddef",
+    "body": "@${1:name}: ${2|String,Number,Boolean,BigInt,Date,RegExp,Array,Object,Any|} = ${3:defaultValue};",
+    "description": "Class field with default value"
+  },
+  "Use class instance": {
+    "prefix": "useclass",
+    "body": [
+      "use ${1:ClassName} [",
+      "\t@${2:field} => ${3:value};",
+      "] as ${4:name};"
+    ],
+    "description": "Create a class instance"
   }
 }
