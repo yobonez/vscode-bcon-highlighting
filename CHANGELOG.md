@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.2.1 - 2025-12-21
+
+### Bug Fixes
+- **String Interpolation**
+  - Fixed multiline interpolation support: `"text [\nvariable\n] more"` now works correctly
+  - Fixed multiple interpolations in the same string
+  - Added support for multiline comments `'...'` inside interpolation
+  - Improved interpolation pattern to prevent empty matches that blocked parsing
+  - Fixed interpolation across newlines (empty brackets with newlines now work)
+
+### Improvements
+- **Code Optimization**
+  - Removed global `braces` pattern that interfered with interpolation
+  - Optimized string interpolation patterns for better multiline handling
+  - Added negative lookbehind `(?<!\\)` for proper escaped quote handling
+  - Reduced pattern complexity for better performance
+
 ## v2.2.0 - 2025-12-21
 
 ### New Features - BCON 2.3.0 Support

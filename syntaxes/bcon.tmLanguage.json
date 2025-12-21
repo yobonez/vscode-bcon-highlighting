@@ -15,9 +15,6 @@
 			"include": "#var_expr_str_double_quote"
 		},
 		{
-			"include": "#braces"
-		},
-		{
 			"include": "#parentheses"
 		},
 		{
@@ -34,9 +31,114 @@
 		},
 		{
 			"include": "#regexp"
+		},
+		{
+			"include": "#literals"
 		}
 	],
 	"repository": {
+		"string-interpolation": {
+			"name": "meta.template.expression.bcon",
+			"begin": "\\[",
+			"end": "\\]",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.template-expression.begin.bcon"
+				}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.template-expression.end.bcon"
+				}
+			},
+			"patterns": [
+				{"include": "#comments"},
+				{"include": "#multiline_comment"},
+				{
+					"name": "constant.language.bcon",
+					"match": "\\b(True|False|Null|Undefined|NaN|Infinity)\\b"
+				},
+				{"include": "#numeric-literals"},
+				{"include": "#regexp-literal"},
+				{
+					"name": "keyword.other.encoding.bcon",
+					"match": "(?<=\")\\.(date|ascii|base64|base64url|hex|ucs2|ucs-2|utf16le|utf-16le|utf8|utf-8|bin|binary|latin1)\\b"
+				},
+				{
+					"name": "string.quoted.double.bcon",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.bcon",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name":"meta.template.expression.bcon",
+					"match":"(\\b(Main)\\b(\\.)|\\b(This)\\b(\\.)|([_a-zA-Z][_a-zA-Z0-9]*)(\\.))|([_a-zA-Z][_a-zA-Z0-9]*)(\\.)?",
+					"captures":{
+						"2": {"name": "variable.language.main.bcon"},
+						"3": {"name": "punctuation.accessor.dot.bcon"},
+						"4": {"name": "variable.language.this.bcon"},
+						"5": {"name": "punctuation.accessor.dot.bcon"},
+						"6": {"name": "variable.other.object.bcon"},
+						"7": {"name": "punctuation.accessor.dot.bcon"},
+						"8": {"name": "variable.other.property.bcon"},
+						"9": {"name": "punctuation.accessor.dot.bcon"}
+					}
+				}
+			]
+		},
+		"string-with-interpolation": {
+			"name": "string.quoted.double.bcon",
+			"begin": "\"",
+			"end": "\"(?<!\\\\)",
+			"beginCaptures": {
+				"0": {"name": "punctuation.definition.string.begin.bcon"}
+			},
+			"endCaptures": {
+				"0": {"name": "punctuation.definition.string.end.bcon"}
+			},
+			"patterns": [
+				{
+					"name": "constant.character.escape.bcon",
+					"match": "\\\\."
+				},
+				{"include": "#string-interpolation"}
+			]
+		},
+		"numeric-literals": {
+			"patterns": [
+				{
+					"name": "constant.numeric.hexadecimal.bcon",
+					"match": "\\b0x[A-Fa-f0-9]+\\b"
+				},
+				{
+					"name": "constant.numeric.binary.bcon",
+					"match": "\\b0b[0-1]+\\b"
+				},
+				{
+					"name": "constant.numeric.octal.bcon",
+					"match": "\\b0o[0-7]+\\b"
+				},
+				{
+					"name": "constant.numeric.decimal.bcon",
+					"match": "-?\\b\\d+(\\.\\d+)?(e[+-]?\\d+)?(n)?\\b"
+				}
+			]
+		},
+		"regexp-literal": {
+			"name": "string.regexp.bcon",
+			"match": "(/)((?:[^\\\\/]|\\\\.)*)(/)([dgimsuvy]*)",
+			"captures": {
+				"1": {"name": "punctuation.definition.string.begin.bcon"},
+				"2": {"name": "string.regexp.bcon"},
+				"3": {"name": "punctuation.definition.string.end.bcon"},
+				"4": {"name": "keyword.other.bcon"}
+			}
+		},
 		"multiline_comment": {
 			"contentName": "comment.block.bcon",
 			"begin": "(?<=^|[\\s;,:\\[\\]])(')",
@@ -55,44 +157,13 @@
 			"beginCaptures": {
 				"0": {"name": "punctuation.definition.string.begin.bcon"}
 			},
-			"end": "\"",
+			"end": "\"(?<!\\\\)",
 			"endCaptures": {
 				"0": {"name": "punctuation.definition.string.end.bcon"}
 			},
 			"name": "string.quoted.double.bcon",
 			"patterns": [
-				{
-					"name": "meta.template.expression.bcon",
-					"begin": "\\[",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.definition.template-expression.begin.bcon"
-						}
-					},
-					"patterns": [
-						{
-							"name":"meta.template.expression.bcon",
-							"match":"(\\b(Main)\\b(\\.)|\\b(This)\\b(\\.)|([_a-zA-Z][_a-zA-Z0-9]*)(\\.))|([_a-zA-Z0-9]*)(\\.)*",
-							"captures":{
-								"2": {"name": "variable.language.main.bcon"},
-								"3": {"name": "punctuation.accessor.dot.bcon"},
-								"4": {"name": "variable.language.this.bcon"},
-								"5": {"name": "punctuation.accessor.dot.bcon"},
-								"6": {"name": "variable.other.object.bcon"},
-								"7": {"name": "punctuation.accessor.dot.bcon"},
-								"8": {"name": "variable.other.property.bcon"},
-								"9": {"name": "punctuation.accessor.dot.bcon"}
-							}
-						}
-					],
-					"end": "\\]",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.template-expression.end.bcon"
-						}
-					},
-					"contentName": "meta.embedded.line.bcon"
-				},
+				{"include": "#string-interpolation"},
 				{
 					"name": "constant.character.escape.bcon",
 					"match": "(?=.*\"date)([-:.])|(\\\\u[0-9A-Fa-f]{4})|(\\\\.)|(\\\\\")"
@@ -119,45 +190,35 @@
             }]
         },
 		"class-definition": {
-			"begin": "\\b(class)\\s+([A-Z][a-zA-Z0-9_]*)",
+			"begin": "\\b(class)\\s+([A-Z][a-zA-Z0-9_]*)\\s*(?:(\\()([^)]*)\\))?",
 			"beginCaptures": {
 				"1": {"name": "keyword.control.class.bcon"},
-				"2": {"name": "entity.name.type.class.bcon"}
+				"2": {"name": "entity.name.type.class.bcon"},
+				"3": {"name": "punctuation.section.parens.begin.bcon"},
+				"4": {"name": "meta.class.constructor-params.bcon", "patterns": [
+					{
+						"name": "keyword.operator.spread.bcon",
+						"match": "\\.\\.\\."
+					},
+					{
+						"name": "variable.parameter.bcon",
+						"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+					},
+					{
+						"name": "punctuation.separator.parameter.bcon",
+						"match": ","
+					}
+				]}
 			},
 			"end": "\\];",
 			"patterns": [
-				{
-					"name": "meta.class.constructor-params.bcon",
-					"begin": "\\(",
-					"end": "\\)",
-					"beginCaptures": {
-						"0": {"name": "punctuation.section.parens.begin.bcon"}
-					},
-					"endCaptures": {
-						"0": {"name": "punctuation.section.parens.end.bcon"}
-					},
-					"patterns": [
-						{
-							"name": "keyword.operator.spread.bcon",
-							"match": "\\.\\.\\."
-						},
-						{
-							"name": "variable.parameter.bcon",
-							"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
-						},
-						{
-							"name": "punctuation.separator.parameter.bcon",
-							"match": ","
-						}
-					]
-				},
 				{
 					"name": "keyword.control.class.bcon",
 					"match": "\\b(extends)\\b"
 				},
 				{
-					"name": "entity.name.type.class.bcon",
-					"match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+					"name": "punctuation.section.parens.end.bcon",
+					"match": "(?<=^[^\\[]*?)\\)"
 				},
 				{
 					"name": "punctuation.section.class.begin.bcon",
@@ -168,6 +229,9 @@
 				},
 				{
 					"include": "#multiline_comment"
+				},
+				{
+					"include": "#var_expr_str_double_quote"
 				},
 				{
 					"name": "meta.class.field.array-type.bcon",
@@ -276,25 +340,9 @@
 					"name": "constant.language.bcon",
 					"match": "\\b(True|False|Null|Undefined|NaN|Infinity)\\b"
 				},
-				{
-					"name": "constant.numeric.decimal.bcon",
-					"match": "\\b\\d+(\\.\\d+)?(e[+-]?\\d+)?(n)?\\b"
-				},
-				{
-					"name": "constant.numeric.hexadecimal.bcon",
-					"match": "\\b0x[A-Fa-f0-9]+\\b"
-				},
-				{
-					"name": "string.quoted.double.bcon",
-					"begin": "\"",
-					"end": "\"",
-					"patterns": [
-						{
-							"name": "constant.character.escape.bcon",
-							"match": "\\\\."
-						}
-					]
-				},
+				{"include": "#numeric-literals"},
+				{"include": "#regexp-literal"},
+				{"include": "#string-with-interpolation"},
 				{
 					"name": "keyword.other.encoding.bcon",
 					"match": "\\.(date|ascii|base64|base64url|hex|ucs2|ucs-2|utf16le|utf-16le|utf8|utf-8|bin|binary|latin1)\\b"
@@ -434,12 +482,13 @@
 			"beginCaptures": {
 				"0": {"name": "punctuation.definition.string.begin.bcon"}
 			},
-			"end": "\"",
+			"end": "\"(?<!\\\\)",
 			"endCaptures": {
 				"0": {"name": "punctuation.definition.string.end.bcon"}
 			},
 			"name": "string.quoted.double.bcon",
 			"patterns": [
+				{"include": "#string-interpolation"},
 				{
 					"name": "constant.character.escape.bcon",
 					"match": "(?=.*\"\\.date)([-:.])|(\\\\u[0-9A-Fa-f]{4})|(\\\\.)|(\\\\\")"
@@ -578,10 +627,8 @@
 					"name": "constant.language.bcon",
 					"match": "\\b(True|False|Null|Undefined|NaN|Infinity)\\b"
 				},
-				{
-					"name": "constant.numeric.decimal.bcon",
-					"match": "\\b\\d+(\\.\\d+)?(e[+-]?\\d+)?(n)?\\b"
-				},
+				{"include": "#numeric-literals"},
+				{"include": "#regexp-literal"},
 				{
 					"name": "string.quoted.double.bcon",
 					"begin": "\"",
@@ -601,6 +648,21 @@
 					"name": "punctuation.separator.bcon",
 					"match": ","
 				}
+			]
+		},
+		"literals": {
+			"patterns": [
+				{
+					"name": "constant.language.bcon",
+					"match": "\\b(True|False|Null|Undefined|NaN|Infinity)\\b"
+				},
+				{"include": "#numeric-literals"},
+				{"include": "#regexp-literal"},
+				{
+					"name": "keyword.other.encoding.bcon",
+					"match": "(?<=\")\\.(date|ascii|base64|base64url|hex|ucs2|ucs-2|utf16le|utf-16le|utf8|utf-8|bin|binary|latin1)\\b"
+				},
+				{"include": "#string-with-interpolation"}
 			]
 		}
 	},
